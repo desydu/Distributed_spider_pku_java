@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model>
+  <DataType name="sysUser" meta="x:191;y:60">
+    <Property name="matchType">com.database.project.entity.SysUser</Property>
+    <PropertyDef name="usercode">
+      <Property name="dataType">int</Property>
+    </PropertyDef>
+    <PropertyDef name="username">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="password">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="begindate">
+      <Property name="dataType">Date</Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="sysSupUser" meta="x:330;y:8">
+    <Property name="matchType">com.database.project.entity.SysSupuser</Property>
+    <PropertyDef name="supname">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="supcertcode">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="supcode">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="supphone">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="supaddress">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="ischeck">
+      <Property></Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="SysStoreinfo" meta="x:14;y:210">
+    <Property name="matchType">com.database.project.entity.SysStoreinfo</Property>
+    <PropertyDef name="storecode">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="groupcode">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="storename">
+      <Property></Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="GoodsInfo" meta="x:375;y:255">
+    <Property name="matchType">com.database.project.entity.GoodsInfo</Property>
+    <PropertyDef name="goodsid">
+      <Property name="dataType">int</Property>
+    </PropertyDef>
+    <PropertyDef name="goodscode">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="barcode">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="goodschinesename">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="goodsenglishname">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="typecode">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="specification">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="classname">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="unit">
+      <Property></Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="SlCompany">
+    <Property name="matchType">com.database.project.entity.SlCompany</Property>
+    <PropertyDef name="companyId">
+      <Property name="dataType">int</Property>
+    </PropertyDef>
+    <PropertyDef name="companyName">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="fullName">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="web">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="address">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="postcode">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="phone">
+      <Property></Property>
+    </PropertyDef>
+    <PropertyDef name="email">
+      <Property></Property>
+    </PropertyDef>
+  </DataType>
+</Model>
