@@ -12,13 +12,10 @@ import java.util.logging.Level;
 import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.apache.commons.logging.LogFactory;
 
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
-
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 
