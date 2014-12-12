@@ -143,6 +143,8 @@ public class spider {
 
 
 			System.out.println("=========================>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+unVisitedUrl.size());
+
+
 		}
 		
 		
