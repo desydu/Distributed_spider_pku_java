@@ -21,156 +21,137 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-
-
-
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
-import org.jsoup.Jsoup; 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
-
 public class BatchDownload {
 
-        /**
-         * ³ÌÐòËµÃ÷£ºÅúÁ¿×¥È¡ÍøÒ³Í¼Æ¬ÏÂÔØµ½±¾µØ
-         * 
-         * @param args
-         */
-        public static void main(String[] args) {
-                //°Ù¶ÈÍ¼Æ¬
-                String fromUrl = "http://www.douban.com/search?cat=1025&q=%E6%A2%85%E8%A5%BF";
-                
-                StringBuffer pageContents = new StringBuffer();
-                //System.out.println("asdasdas");
-                try{
-    
-                	URL startUrl = new URL(fromUrl);
-	                pageContents = downloadPage(startUrl);
-	                //System.out.println(pageContents);
-	               // if(pageContents.length()==0) System.out.println("asdasdas");
-	                List<String> imgUrls = getImageUrls(pageContents);
-	                //System.out.println(imgUrls.size());
-	                
-	                
-	                //downloadImages(pageContents);
-	                //if(pageContents.length()==0) System.out.println("asdasdas");
-	                //System.out.println(pageContents);
-                }
-                catch(Exception e)
-                {
-                	
-                }
-                
-                
+    /**
+     * ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¥È¡ï¿½ï¿½Ò³Í¼Æ¬ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
+     */
+    public static void main(String[] args) {
+        //ï¿½Ù¶ï¿½Í¼Æ¬
+        String fromUrl = "http://www.douban.com/search?cat=1025&q=%E6%A2%85%E8%A5%BF";
+
+        StringBuffer pageContents = new StringBuffer();
+        //System.out.println("asdasdas");
+        try {
+
+            URL startUrl = new URL(fromUrl);
+            pageContents = downloadPage(startUrl);
+            //System.out.println(pageContents);
+            // if(pageContents.length()==0) System.out.println("asdasdas");
+            List<String> imgUrls = getImageUrls(pageContents);
+            //System.out.println(imgUrls.size());
+
+            //downloadImages(pageContents);
+            //if(pageContents.length()==0) System.out.println("asdasdas");
+            //System.out.println(pageContents);
+        } catch (Exception e) {
+
         }
-        
-        public static StringBuffer downloadPage(URL httpUrl)throws MalformedURLException,IOException 
-		{
-		    StringBuffer data = new StringBuffer();		
-		    String currentLine;		
-		    // ´ò¿ªÊäÈëÁ÷
-		    BufferedReader reader = new BufferedReader(new InputStreamReader(getInputStream(httpUrl), "GBK"));
-		    // ¶ÁÈ¡Êý¾Ý
-		    while ((currentLine = reader.readLine()) != null) {
-		        data.append(currentLine);
-		    }
-		    reader.close();
-		
-		    return data;
-		}
-				
-        public static File downloadFile(String httpUrl, String fileSavePath)throws MalformedURLException, IOException
-		{
-		    File file = new File(fileSavePath);
-		    if (!file.exists()) {
-		        file.createNewFile();
-		    }
-		    URL url = new URL(httpUrl);
-		    // ´ò¿ªÊäÈëÁ÷
-		    BufferedInputStream in = new BufferedInputStream(
-		            getInputStream(url));
-		
-		    // ´ò¿ªÊä³öÁ÷
-		    FileOutputStream out = new FileOutputStream(file);
-		
-		    byte[] buff = new byte[1];
-		    // ¶ÁÈ¡Êý¾Ý
-		    while (in.read(buff) > 0) {
-		        out.write(buff);
-		    }		
-		    out.flush();
-		    out.close();
-		    in.close();
-		    return file;
-		}
-        
-        private static void downloadImages(StringBuffer pageContents)throws MalformedURLException, IOException 
-		{	        
-	        // »ñÈ¡htmlÒ³Ãæ
-	        StringBuffer page = pageContents;
-	        // »ñÈ¡Ò³ÃæÖÐµÄµØÖ·
-	        List<String> imgUrls = getImageUrls(page);
-	        // ±£´æÍ¼Æ¬£¬·µ»ØÎÄ¼þÁÐ±í
-	        List<File> fileList = new ArrayList<File>();
-	        String imgSaveDir="E:";
-	        int i = 1;
-	        for (String url : imgUrls) 
-	        {
-	        	String fileName = url.substring(url.lastIndexOf("/") + 1);
-	        	File file = downloadFile(url, imgSaveDir + "\\" + fileName);
-	            System.out.println(file.getPath()+ " ÏÂÔØÍê³É£¡");
-	            fileList.add(file);
-	            i++;
-	        }	        
-	    }
-        
-		private static InputStream getInputStream(URL httpUrl) throws IOException 
-		{
-	        // ÍøÒ³Url
-	        URL url = httpUrl;
-	        URLConnection uc = url.openConnection();
-	        uc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
-	        return uc.getInputStream();
-	    }
-        
-        
-		
-        
-        public static List<String> getImageUrls(StringBuffer html) 
-		{
-	        List<String> result = new ArrayList<String>();
-	        // ½«×Ö·û´®½âÎöÎªhtmlÎÄµµ
-	        Document doc = Jsoup.parse(html.toString());
-	        // »ñÈ¡img±êÇ©
-	        Elements es =doc.getElementsByTag("img");
-	        //Element es = doc.getElementById("script");
-	        //Elements ss = new Elements();
-	        //ss.add(es);
-	        //System.out.println(es.size());
-	         //doc.getElementsByTag("img");
-	        
-	        // »ñÈ¡Ã¿Ò»¸öimg±êÇ©srcµÄÄÚÈÝ£¬Ò²¾ÍÊÇÍ¼Æ¬µØÖ·
-	        for (Iterator<Element> i = es.iterator(); i.hasNext();) 
-	        {
-	            Element e = i.next();
-	            String r = e.attr("src");
-	            Pattern p = Pattern.compile("http://.+\\.(jpg|jpeg)");
-	            Matcher m = p.matcher(r);
-	            if (m.matches()) 
-	            {
-	                result.add(r);
-	            }
-	        }
-	        return result;
-	    }
+
+
+    }
+
+    public static StringBuffer downloadPage(URL httpUrl) throws MalformedURLException, IOException {
+        StringBuffer data = new StringBuffer();
+        String currentLine;
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getInputStream(httpUrl), "GBK"));
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½
+        while ((currentLine = reader.readLine()) != null) {
+            data.append(currentLine);
+        }
+        reader.close();
+
+        return data;
+    }
+
+    public static File downloadFile(String httpUrl, String fileSavePath) throws MalformedURLException, IOException {
+        File file = new File(fileSavePath);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        URL url = new URL(httpUrl);
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        BufferedInputStream in = new BufferedInputStream(
+                getInputStream(url));
+
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        FileOutputStream out = new FileOutputStream(file);
+
+        byte[] buff = new byte[1];
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½
+        while (in.read(buff) > 0) {
+            out.write(buff);
+        }
+        out.flush();
+        out.close();
+        in.close();
+        return file;
+    }
+
+    private static void downloadImages(StringBuffer pageContents) throws MalformedURLException, IOException {
+        // ï¿½ï¿½È¡htmlÒ³ï¿½ï¿½
+        StringBuffer page = pageContents;
+        // ï¿½ï¿½È¡Ò³ï¿½ï¿½ï¿½ÐµÄµï¿½Ö·
+        List<String> imgUrls = getImageUrls(page);
+        // ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð±ï¿½
+        List<File> fileList = new ArrayList<File>();
+        String imgSaveDir = "E:";
+        int i = 1;
+        for (String url : imgUrls) {
+            String fileName = url.substring(url.lastIndexOf("/") + 1);
+            File file = downloadFile(url, imgSaveDir + "\\" + fileName);
+            System.out.println(file.getPath() + " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½");
+            fileList.add(file);
+            i++;
+        }
+    }
+
+    private static InputStream getInputStream(URL httpUrl) throws IOException {
+        // ï¿½ï¿½Ò³Url
+        URL url = httpUrl;
+        URLConnection uc = url.openConnection();
+        uc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+        return uc.getInputStream();
+    }
+
+
+    public static List<String> getImageUrls(StringBuffer html) {
+        List<String> result = new ArrayList<String>();
+        // ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Îªhtmlï¿½Äµï¿½
+        Document doc = Jsoup.parse(html.toString());
+        // ï¿½ï¿½È¡imgï¿½ï¿½Ç©
+        Elements es = doc.getElementsByTag("img");
+        //Element es = doc.getElementById("script");
+        //Elements ss = new Elements();
+        //ss.add(es);
+        //System.out.println(es.size());
+        //doc.getElementsByTag("img");
+
+        // ï¿½ï¿½È¡Ã¿Ò»ï¿½ï¿½imgï¿½ï¿½Ç©srcï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Ò²ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ö·
+        for (Iterator<Element> i = es.iterator(); i.hasNext(); ) {
+            Element e = i.next();
+            String r = e.attr("src");
+            Pattern p = Pattern.compile("http://.+\\.(jpg|jpeg)");
+            Matcher m = p.matcher(r);
+            if (m.matches()) {
+                result.add(r);
+            }
+        }
+        return result;
+    }
 }
         
         

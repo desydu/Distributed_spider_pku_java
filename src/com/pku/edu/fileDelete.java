@@ -5,12 +5,12 @@ import java.io.FileInputStream;
 
 public class fileDel {
 
-	/**
-	 * @param args
-	 * @throws Exception 
-	 */
-	/*public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
+    /**
+     * @param args
+     * @throws Exception
+     */
+    /*public static void main(String[] args) throws Exception {
+        // TODO Auto-generated method stub
 		fileDel f=new fileDel();
 	       File dir=new File("data");
 	        if(dir.isDirectory()){
@@ -23,20 +23,18 @@ public class fileDel {
 	}
 	}
 	*/
-	
-	
-	 public long getFileSizes(File f) throws Exception{//È¡µÃÎÄ¼þ´óÐ¡
-	        long s=0;
-	        if (f.exists()) {
-	            FileInputStream fis = null;
-	            fis = new FileInputStream(f);
-	           s= fis.available();
-	        } else {
-	            f.createNewFile();
-	            System.out.println("ÎÄ¼þ²»´æÔÚ");
-	        }
-	        return s;
-	    }
+    public long getFileSizes(File f) throws Exception {//È¡ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡
+        long s = 0;
+        if (f.exists()) {
+            FileInputStream fis = null;
+            fis = new FileInputStream(f);
+            s = fis.available();
+        } else {
+            f.createNewFile();
+            System.out.println("ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        }
+        return s;
+    }
 }
 
 
