@@ -38,6 +38,7 @@ public class BatchDownload {
     /**
      * ����˵��������ץȡ��ҳͼƬ���ص�����
      */
+
     public static void main(String[] args) {
         //�ٶ�ͼƬ
         String fromUrl = "http://www.douban.com/search?cat=1025&q=%E6%A2%85%E8%A5%BF";
