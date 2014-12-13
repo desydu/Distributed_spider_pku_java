@@ -15,21 +15,7 @@ private ArrayList threadList;
 
 private Object logger;
 
-public static void main(String argv[]) throws Exception {
 
-     if(argv[0] == null){
-
-       System.out.println("Missing required argument: [Sit URL]");
-
-       return ;
-
-     }
-
-            SpiderFirst Spider = new SpiderFirst();
-
-            Spider.go();
-
-}
 
 public void Spider(String strURL) {
 
@@ -57,9 +43,23 @@ public void Spider(String strURL) {
 
 }
 
+public static void main(String argv[]) throws Exception {
+
+     if(argv[0] == null){
+
+       System.out.println("Missing required argument: [Sit URL]");
+
+       return ;
+
+     }
+
+            SpiderFirst Spider = new SpiderFirst();
+
+            Spider.go();
+
+}
 public void go() throws Exception {
 
-    // index each entry point URL
 
     long start = System.currentTimeMillis();
 
@@ -246,13 +246,12 @@ private void indexURL(String url) throws Exception {
 
 }
 
-private String[] parseURLs(Object summary) {
-	// TODO Auto-generated method stub
+private String loadURL(String url) {
+	
 	return null;
 }
-
-private String loadURL(String url) {
-	// TODO Auto-generated method stub
+private String[] parseURLs(Object summary) {
+	
 	return null;
 }
 
