@@ -1,6 +1,5 @@
-
-
 import java.util.LinkedList;
+
 /**
  * 队列，保存将要访问的URL
  */
