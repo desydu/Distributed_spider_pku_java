@@ -67,6 +67,38 @@ public class File2DB
 		}
 	}
 
+	//更新数据库
+	static void update(String data, String tableName)
+	{
+
+		DBUtil util = new DBUtil();
+		Connection conn = util.getConnection();
+		String insert = "update " + tableName + "where data='" + data "'";
+		PreparedStatement pstmt = null;
+		try
+		{
+			pstmt = conn.prepareStatement(insert);
+			pstmt.setString(1, data);
+			pstmt.execute();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 	//删除表内容
 	static void delete(String tableName)
 	{
