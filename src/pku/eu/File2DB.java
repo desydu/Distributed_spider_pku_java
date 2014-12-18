@@ -128,7 +128,39 @@ public class File2DB
 			}
 		}
 	}
+	
+	//更新数据库
+	static void update(String originData, String changeData String tableName)
+	{
 
+		DBUtil util = new DBUtil();
+		Connection conn = util.getConnection();
+		String insert = "update " + tableName + "SET data='" + changeData + "' where data='" + originData + "'";
+		PreparedStatement pstmt = null;
+		try
+		{
+			pstmt = conn.prepareStatement(insert);
+			pstmt.setString(1, data);
+			pstmt.execute();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	//	public static void main(String[] args)
 	//	{
 	//
