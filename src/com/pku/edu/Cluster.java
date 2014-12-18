@@ -29,5 +29,21 @@ public class Cluster{
             }
         }
     }
+    
+    // 优化聚类均值计算算法
+    public void calculateMean(double[][] coordinates) {
+        int currentMemberLength = CurrentMembership.size(); 
+        for (int i = 0; i < currentMemberLength; i++){
+            double[] coord = coordinates[CurrentMembership.get(i)];
+            int coordLength = coord.length;
+            for (int j = 0; j < coordLength; j++){
+                Mean[j] += coord[j];
+            }
+            int meanLength = Mean.length;
+            for (int k = 0; k < meanLength; k++){
+                Mean[k] /= coordLength;
+            }
+        }
+    }
 }
 
