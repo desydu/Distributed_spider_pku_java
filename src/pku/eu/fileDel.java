@@ -37,6 +37,25 @@ public class fileDel {
 	        }
 	        return s;
 	    }
+		
+	// optimize
+	public long getFileSizes(File f){
+		long s=0;
+		try {
+			if (f.exists()) {
+				FileInputStream fis = null;
+				fis = new FileInputStream(f);
+			    s= fis.available();
+			} else {
+				f.createNewFile();
+				s = 0;
+				System.out.println("file not exist");
+			}
+			return s;
+		}catch(Exception e) {
+			System.out.println("get file size error");
+		}
+	}
 }
 
 
