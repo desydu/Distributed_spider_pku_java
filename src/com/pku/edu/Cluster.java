@@ -29,13 +29,8 @@ public class Cluster{
             }
         }
     }
-<<<<<<< HEAD
-    
-    // 优化聚类均值计算算法
-=======
 	
 	// 优化聚类均值计算算法
->>>>>>> optimize
     public void calculateMean(double[][] coordinates) {
         int currentMemberLength = CurrentMembership.size(); 
         for (int i = 0; i < currentMemberLength; i++){
@@ -50,9 +45,5 @@ public class Cluster{
             }
         }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> optimize
 }
 
